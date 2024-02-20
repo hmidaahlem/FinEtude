@@ -1,6 +1,6 @@
 class RegistrationController < ApplicationController
-  before_action :authenticate_superadmin, only: [:create]
-
+  before_action :authenticate_superadmin, only: [:new, :create]
+  include SessionsHelper
   def new
     @admin = Person.new
   end
@@ -11,7 +11,7 @@ class RegistrationController < ApplicationController
 
     if @admin.save
       # Envoyer les données de connexion par email à l'admin nouvellement créé
-   AdminMailer.new_admin_email(@admin).deliver_now
+      AdminMailer.with(admin: @admin).new_admin_email.deliver_now
 
       render json: { message: "L'administrateur a été créé avec succès." }, status: :created
     else
@@ -26,6 +26,8 @@ class RegistrationController < ApplicationController
   end
 
   def authenticate_superadmin
-    superadmin_id = params[:superadmin_id]
+    unless current_user && current_user.superadmin?
+      render json: { error: "Accès non autorisé." }, status: :unauthorized
+    end
   end
 end

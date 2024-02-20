@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
  
-  get 'registration/new', to: 'registration#new'
+  post '/login', to: 'sessions#create', as: :login # Afficher le formulaire de connexion
+ 
+  delete '/logout', to: 'sessions#destroy', as: :logout 
+  get 'registration/new', to: 'registration#new' ,as: 'new_registration'
+
 
   # Route pour créer un nouvel administrateur (accessible uniquement aux super administrateurs)
   post 'registration/create', to: 'registration#create'
