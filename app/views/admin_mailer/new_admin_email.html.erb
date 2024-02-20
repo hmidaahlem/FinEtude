@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h2>Bienvenue dans notre application !</h2>
+  <p>Bonjour <%= @admin.name %>,</p>
+  
+  <p>Votre compte administrateur a été créé avec succès dans notre application. Vous pouvez maintenant vous connecter avec vos identifiants :</p>
+  
+  <ul>
+    <li><strong>Nom d'utilisateur :</strong> <%= @admin.email %></li>
+    <li><strong>Mot de passe :</strong> Votre mot de passe choisi lors de l'inscription</li>
+  </ul>
+  
+  <p>Merci de votre inscription et bienvenue dans notre communauté !</p>
+</body>
+</html>

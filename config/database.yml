@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  host: localhost
+  encoding: unicode
+  pool: 5
+  username: postgres 
+  password: Ahlem12-
+
+development:
+  <<: *default
+  database: terminal_development
+
+test:
+  <<: *default
+  database: terminal_test
+
+production:
+  <<: *default
+  database: terminal_production
+  username: pfe
+  password: <%= ENV["API_APP_DATABASE_PASSWORD"] %>
